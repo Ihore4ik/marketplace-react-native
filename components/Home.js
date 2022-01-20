@@ -1,49 +1,39 @@
 import React, {useState, useEffect} from "react";
-import {FlatList, StyleSheet, View} from "react-native";
+import { FlatList, StyleSheet, View} from "react-native";
 import SearchGoods from "./SearchGoods";
 import GoodsItem from "./GoodsItem";
-
 const Home = ({navigation}) => {
     const [goods, setGoods] = useState([]);
-    const fetchText = () => {
-        return fetch('https://bsa-marketplace.azurewebsites.net/api/Products',
-            {
-                method: "GET",
-                headers: {
-                    'accept': 'text/plain'
-                }
-            })
-    }
-    const getItemId = (id) => {
-        navigation.navigate('ItemInfo', {id})
-    }
-    useEffect(() => {
-        fetchText()
+    const fetchGoods = () => {
+        fetch(`https://bsa-marketplace.azurewebsites.net/api/Products`,
+        )
             .then(response => response.json())
             .then(data => setGoods(data))
             .catch(error => {
                 console.log('Error : ' + error)
-            });
+            })
+
+    }
+    const getItemId = (id) => {
+        navigation.navigate('ItemInfo', {id})
+    }
+    const handleDelete = (id) => {
+        const newGoods = goods.filter(el=>el.id !== id);
+        setGoods(newGoods);
+    }
+    useEffect(() => {
+        fetchGoods();
     }, []);
     return (
         <View style={styles.home}>
-            <SearchGoods fetchText={fetchText}/>
-
+            <SearchGoods/>
             <View style={styles.c}>
                 <FlatList
                     data={goods}
-                    renderItem={({}) => {
-                        return (
-                            <View>
-                                {goods.map((item,key) => {
-                                    return (
-                                        <GoodsItem item={item}
-                                                   getItemId={() => getItemId(item.id)}/>
-                                    )
-                                })}
-                            </View>
-                        )
-                    }}
+                    renderItem={({item}) => <GoodsItem item={item}
+                                                       getItemId={()=>getItemId(item.id)}
+                                                       handleDelete={()=>handleDelete(item.id)}
+                    />}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -62,6 +52,10 @@ const styles = StyleSheet.create({
     },
     c: {
         marginTop: 50
+    },
+    loader: {
+        marginVertical: 15,
+        alignItems: "center"
     }
 })
 

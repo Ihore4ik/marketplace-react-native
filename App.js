@@ -15,7 +15,7 @@ const App = () =>  {
               name="Marketplace"
               component={Home}
           />
-           <Stack.Screen name="Item" component={ItemInfo} />
+           <Stack.Screen name="ItemInfo" component={ItemInfo} />
         </Stack.Navigator>
       </NavigationContainer>
 

@@ -2,24 +2,27 @@ import React from "react";
 import {Text, StyleSheet, View, Image, TouchableOpacity} from "react-native";
 
 
-const GoodsItem = ({item, getItemId}) => {
+const GoodsItem = ({item,getItemId,handleDelete}) => {
     return (
-        <View style={styles.item}>
-            <Image style={styles.img} source={{
-                uri: item.picture,
-            }}/>
-            <View style={styles.info}>
-               <TouchableOpacity>
-                   <Text style={styles.title} onPress={getItemId}>{item.title}</Text>
-               </TouchableOpacity>
-                <Text style={styles.desc} numberOfLines={5}>{item.description}</Text>
-            </View>
-            <View style={styles.price}>
-                <Text>
-                    {item.price}$
-                </Text>
-            </View>
-        </View>
+       <TouchableOpacity onLongPress={handleDelete}>
+           <View style={styles.item}>
+               <Image style={styles.img} source={{
+                   uri: item.picture,
+               }}/>
+               <View style={styles.info}>
+                   <TouchableOpacity>
+                       <Text style={styles.title} onPress={getItemId}>{item.title}</Text>
+                   </TouchableOpacity>
+                   <Text style={styles.desc} numberOfLines={5}>{item.description}</Text>
+               </View>
+               <View style={styles.price}>
+                   <Text>
+                       {item.price}$
+                   </Text>
+               </View>
+           </View>
+       </TouchableOpacity>
+
     )
 };
 

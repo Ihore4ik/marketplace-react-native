@@ -1,21 +1,15 @@
 import React, { useState} from 'react';
 import {View, TextInput, Button, StyleSheet} from 'react-native';
 
-const SearchGoods = ({fetchText}) => {
+const SearchGoods = () => {
     const [inputText, setInputText] = useState("");
-
-    const onSubmit = (text) => {
-        fetchText(text);
-        setInputText("");
-    }
-
     return (
         <View style={styles.formWrapper}>
             <TextInput style={styles.input}
                        onChangeText={text => setInputText(text)}
                        defaultValue={inputText}
             />
-            <Button style={styles.btn} title="Find" onPress={(() => onSubmit(inputText))}/>
+            <Button style={styles.btn} title="Find" />
         </View>
     );
 };
