@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import GoodsItem from "./components/GoodsItem";
 import Home from "./components/Home";
+import ItemInfo from "./components/ItemInfo";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +15,7 @@ const App = () =>  {
               name="Marketplace"
               component={Home}
           />
-           <Stack.Screen name="GoodsItem" component={GoodsItem} />
+           <Stack.Screen name="Item" component={ItemInfo} />
         </Stack.Navigator>
       </NavigationContainer>
 

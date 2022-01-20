@@ -1,15 +1,17 @@
 import React from "react";
-import {Text, StyleSheet, View, Image} from "react-native";
+import {Text, StyleSheet, View, Image, TouchableOpacity} from "react-native";
 
 
-const GoodsItem = ({item, navigation, route, getItemId}) => {
+const GoodsItem = ({item, getItemId}) => {
     return (
         <View style={styles.item}>
             <Image style={styles.img} source={{
                 uri: item.picture,
             }}/>
             <View style={styles.info}>
-                <Text style={styles.title} onPress={getItemId}>{item.title}</Text>
+               <TouchableOpacity>
+                   <Text style={styles.title} onPress={getItemId}>{item.title}</Text>
+               </TouchableOpacity>
                 <Text style={styles.desc} numberOfLines={5}>{item.description}</Text>
             </View>
             <View style={styles.price}>
